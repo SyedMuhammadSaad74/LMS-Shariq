@@ -5,6 +5,7 @@ import { AdmissionTable } from "@/components/DataTables/AdmissionTable";
 import { BatchesTable } from "@/components/DataTables/BatchTable";
 import { NewAdmissionModal } from "@/components/Dialogs/AdmissionModal";
 import { BatchModal } from "@/components/Dialogs/BatchModal";
+import { AdmissionModal } from "@/lib/modals/AdmissionModal";
 
 export default async function Admissions() {
   const { admissions } = await getAdmissions();

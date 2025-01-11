@@ -1,4 +1,4 @@
-import { getSingleAdmission } from "@/actions/admissions";
+// import { getSingleAdmission } from "@/actions/admissions";
 import AdmissionDetail from "@/components/AdmissionDetail/AdmissionDetail";
 
 export default async function AdmissionDetailPage({ params }) {

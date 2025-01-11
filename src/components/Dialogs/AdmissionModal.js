@@ -112,9 +112,8 @@ function BatchForm({ className, courses, batches }) {
               <SelectValue placeholder="Select Batch" />
             </SelectTrigger>
             <SelectContent>
-              {batches
-                .filter((data) => data.course._id == chosenCourse)
-                .map((batch) => (
+              {batches.filter((data)=>data.course._id == chosenCourse)
+              .map((batch) => (
                   <SelectItem key={batch._id} value={batch._id}>
                     {batch.title}
                   </SelectItem>
