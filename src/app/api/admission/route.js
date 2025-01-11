@@ -2,8 +2,6 @@ import { connectDB } from "@/lib/dbConnect";
 import { BatchModal } from "@/lib/modals/BatchModal";
 import { CourseModal } from "@/lib/modals/CourseModal";
 import { AdmissionModal } from "@/lib/modals/AdmissionModal";
-import { UserModal } from "@/lib/modals/UserModal";
-import { ApplicationModal } from "@/lib/modals/ApplicationModal";
 
 export async function POST(request) {
   await connectDB();
@@ -28,7 +26,8 @@ export async function PUT(request) {
     {
       status: status,
     }
-  ).exec();
+  ).lean();
+  console.log("updated=>" , updated )
   console.log("updated=>", updated);
 
   return Response.json({
@@ -49,25 +48,17 @@ export async function GET(req) {
   if (searchParams.get("batch")) {
     query.batch = searchParams.get("batch");
   }
-  if (searchParams.get("admission")) {
-    query.batch = searchParams.get("admission");
-  }
-  if (searchParams.get("user")) {
-    query.batch = searchParams.get("user");
-  }
   console.log("STatus in API=>", searchParams.get("status"));
   if (searchParams.get("status")) {
     query.status = searchParams.get("status");
   }
 
-  const applications = await ApplicationModal.find(query)
-    .populate("course", "title")
-    .populate("batch", "title")
-    .populate("admission",)
-    .populate("user", "fullname email profileImg");
-    return Response.json({
+  const admissions = await AdmissionModal.find(query)
+    .populate("course", "title description")
+    .populate("batch", "title");
+  return Response.json({
     error: false,
-    msg: "Applications Fetched Successfully",
-    applications,
+    msg: "Admission Fetched Successfully",
+    admissions,
   });
 }

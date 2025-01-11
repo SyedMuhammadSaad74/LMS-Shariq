@@ -5,34 +5,24 @@ import { AdmissionModal } from "@/lib/modals/AdmissionModal";
 import { UserModal } from "@/lib/modals/UserModal";
 import { ApplicationModal } from "@/lib/modals/ApplicationModal";
 
+
 export async function POST(request) {
   await connectDB();
   const obj = await request.json();
-  console.log("obj in backend=>", obj);
-  const application = await ApplicationModal.findOne({
-    admission: obj.admission,
-    user: obj.user,
-  });
-
-  if (application) {
-    return Response.json({
-      error: true,
-      msg: "You have already applied to this course.",
-    });
-  }
-  let newApplication = new ApplicationModal({ ...obj });
+  let  newApplication = new ApplicationModal({...obj});
   newApplication = await newApplication.save();
 
   return Response.json({
-    error: false,
-    msg: "Application Added Successfully",
+    error : false,
+    msg: "Application  Added Succesfully",
     application: newApplication,
   });
-}
+  }
+
 
 export async function GET(req) {
   await connectDB();
-  try {
+
     const reqUrl = req.url;
     const { searchParams } = new URL(reqUrl);
     const query = {};
@@ -59,26 +49,23 @@ export async function GET(req) {
       msg: "Applications Fetched Successfully",
       applications,
     });
-  } catch (err) {
-    console.log(err);
   }
-}
 
-export async function PUT(request) {
-  await connectDB();
-  const obj = await request.json();
-  const { id, status } = obj;
+// export async function PUT(request) {
+//   await connectDB();
+//   const obj = await request.json();
+//   const { id, status } = obj;
 
-  const updated = await ApplicationModal.findOneAndUpdate(
-    { _id: id },
-    {
-      status: status,
-    }
-  ).exec();
+//   const updated = await ApplicationModal.findOneAndUpdate(
+//     { _id: id },
+//     {
+//       status: status,
+//     }
+//   ).exec();
 
-  return Response.json({
-    error: false,
-    msg: "Admission Added Successfully",
-    application: updated,
-  });
-}
+//   return Response.json({
+//     error: false,
+//     msg: "Admission Added Successfully",
+//     application: updated,
+//   });
+// }

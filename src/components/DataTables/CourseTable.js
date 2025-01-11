@@ -74,6 +74,14 @@ export const columns = [
       <Image src={row.getValue("thumbnail")} height={50} width={80} />
     ),
   },
+{
+  accessorKey : "status",
+  header : "Status",
+  cell : ({ row }) => (
+    <div className="capitalize">{row.getValue("status")}</div>
+  ),
+},
+
   {
     accessorKey: "title",
     header: ({ column }) => {

@@ -78,6 +78,7 @@ export function CourseDialog() {
 }
 
 function CourseForm({ className }) {
+
   return (
     <form
       action={addCourse}
